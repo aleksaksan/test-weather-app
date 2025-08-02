@@ -43,9 +43,5 @@ export const useGeolocation = () => {
     }
   }
 
-  return {
-    latitude,
-    longitude,
-    error,
-  }
+  return {}
 }
