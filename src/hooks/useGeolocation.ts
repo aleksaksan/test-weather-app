@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 const URL = 'https://nominatim.openstreetmap.org/reverse'
 
@@ -8,9 +8,11 @@ export const useGeolocation = () => {
   const loading = ref<boolean>(true)
   const error = ref<string | null>(null)
   const city = ref<string | null>(null)
+
   const getLocation = () => {
     if (!navigator.geolocation) {
-      error.value = 'Browser is not supports geolocation API'
+      error.value = 'Browser does not support Geolocation API'
+      loading.value = false
       return
     }
 
@@ -20,28 +22,48 @@ export const useGeolocation = () => {
         longitude.value = position.coords.longitude
       },
       (e) => {
-        error.value = `Can't get geolocation!: ${e.message}`
+        error.value = `Can't get geolocation: ${e.message}`
+        loading.value = false
       },
     )
   }
 
-  const getCity = async (URL: string, latitude: number, longitude: number) => {
+  const getCity = async (lat: number, lon: number) => {
     try {
-      getLocation()
-      const res = await fetch(`${URL}?lat=${latitude}&lon=${longitude}&format=json`, {
+      const res = await fetch(`${URL}?lat=${lat}&lon=${lon}&format=json`, {
         headers: {
           'User-Agent': 'MyVueApp/1.0',
         },
       })
 
       const data = await res.json()
-      city.value = data.address.city || data.address.town || data.address.village || 'Неизвестно'
+      city.value = data.address.city || 'unknown'
     } catch (err) {
-      error.value = err.message | 'Something wents wrong'
+      if (err instanceof Error) {
+        error.value = err.message
+      } else {
+        error.value = String(err)
+      }
     } finally {
       loading.value = false
     }
   }
 
-  return {}
+  watch([latitude, longitude], ([lat, lon]) => {
+    if (lat !== null && lon !== null) {
+      getCity(lat, lon)
+    }
+  })
+
+  onMounted(() => {
+    getLocation()
+  })
+
+  return {
+    latitude,
+    longitude,
+    city,
+    loading,
+    error,
+  }
 }

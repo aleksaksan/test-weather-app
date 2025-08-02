@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useGeolocation } from '@/composables/useGeolocation'
+import { useGeolocation } from '@/hooks/useGeolocation'
 
-const { latitude, longitude, error } = useGeolocation()
+const { latitude, longitude, error, city, loading } = useGeolocation()
 </script>
 
 <template>
@@ -12,8 +12,12 @@ const { latitude, longitude, error } = useGeolocation()
 
     <div v-else-if="latitude && longitude" class="result">
       <h3>Ваши координаты:</h3>
-      <p>Широта: {{ latitude.toFixed(6) }}</p>
-      <p>Долгота: {{ longitude.toFixed(6) }}</p>
+      <p>Широта: {{ latitude }}</p>
+      <p>Долгота: {{ longitude }}</p>
+    </div>
+
+    <div>
+      <h3>Ваш город: {{ city }}</h3>
     </div>
   </div>
 </template>
