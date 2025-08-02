@@ -5,7 +5,8 @@ const { latitude, longitude, error, city, loading } = useGeolocation()
 </script>
 
 <template>
-  <div class="geolocation-wrapper">
+  <div v-if="loading">Gettings your location...</div>
+  <div v-else class="geolocation-wrapper">
     <div v-if="error" class="status error">
       {{ error }}
     </div>
