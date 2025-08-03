@@ -3,10 +3,8 @@ import CurrentLocation from '@/components/CurrentLocation.vue'
 </script>
 
 <template>
-  <main>
-    Hello!
-    <div>
-      <CurrentLocation />
-    </div>
-  </main>
+  Hello!
+  <div>
+    <CurrentLocation />
+  </div>
 </template>
