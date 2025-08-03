@@ -30,11 +30,7 @@ export const useGeolocation = () => {
 
   const getCity = async (lat: number, lon: number) => {
     try {
-      const res = await fetch(`${URL}?lat=${lat}&lon=${lon}&format=json`, {
-        headers: {
-          'User-Agent': 'MyVueApp/1.0',
-        },
-      })
+      const res = await fetch(`${URL}?lat=${lat}&lon=${lon}&format=json`)
 
       const data = await res.json()
       city.value = data.address.city || 'unknown'

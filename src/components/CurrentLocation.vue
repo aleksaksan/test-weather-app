@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { useGeolocation } from '@/hooks/useGeolocation'
+import { watch, defineEmits } from 'vue'
 
 const { latitude, longitude, error, city, loading } = useGeolocation()
+const emit = defineEmits(['location-changed'])
+watch([latitude, longitude], ([lat, lon]) => {
+  if (lat && lon) {
+    emit('location-changed', lat, lon)
+  }
+})
 </script>
 
 <template>

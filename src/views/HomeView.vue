@@ -1,10 +1,5 @@
-<script setup lang="ts">
-import CurrentLocation from '@/components/CurrentLocation.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  Hello!
-  <div>
-    <CurrentLocation />
-  </div>
+  <div>Hello!</div>
 </template>
