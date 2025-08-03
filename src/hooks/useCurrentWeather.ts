@@ -7,7 +7,7 @@ export function useCurrentWeather(lat: Ref<number | null>, lon: Ref<number | nul
   const curData = ref(null)
   const loading = ref<boolean>(true)
   const getCurrentWeather = async () => {
-    if (!lat || !lon) {
+    if (!lat.value || !lon.value) {
       error.value = "Can't get your coordinates!"
       loading.value = false
       return
@@ -15,9 +15,9 @@ export function useCurrentWeather(lat: Ref<number | null>, lon: Ref<number | nul
 
     try {
       const currentParams = ['temperature_2m', 'weather_code', 'apparent_temperature']
-      const params = JSON.stringify(currentParams.join(',')).toString()
+      const params = currentParams.join(',')
       const res = await fetch(
-        `${WEATHER_URL}?latitude=${lat}&longitude=${lon}&timezone=auto&current=${params}`,
+        `${WEATHER_URL}?latitude=${lat.value}&longitude=${lon.value}&timezone=auto&current=${params}`,
       )
 
       const data = await res.json()
