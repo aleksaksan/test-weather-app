@@ -1,0 +1,10 @@
+<template>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M6 17C3.2 17 1 14.8 1 12C1 9.2 3.2 7 6 7C6.2 7 6.5 7 6.7 7.1C7.5 5.1 9.4 4 11.5 4C14 4 16 5.5 16.5 7.5C17.6 7.7 18.5 8.6 18.5 9.8C18.5 11 17.6 12 16.5 12H18C20.2 12 22 13.8 22 16C22 18.2 20.2 20 18 20H6Z"
+      fill="#B0BEC5"
+      stroke="#78909C"
+      stroke-width="1.5"
+    />
+  </svg>
+</template>

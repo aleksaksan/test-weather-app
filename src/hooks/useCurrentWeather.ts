@@ -1,14 +1,17 @@
-import { ref, onMounted, watch, type Ref } from 'vue'
+import type { CurrentWeatherResponse } from '@/types/weather'
+import { ref, watch, type Ref } from 'vue'
 
 const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast'
 
 export function useCurrentWeather(lat: Ref<number | null>, lon: Ref<number | null>) {
   const error = ref<string | null>(null)
-  const curData = ref(null)
+  const curData = ref<CurrentWeatherResponse | null>(null)
   const loading = ref<boolean>(true)
   const getCurrentWeather = async () => {
     if (!lat.value || !lon.value) {
       error.value = "Can't get your coordinates!"
+      console.log(error.value)
+      console.log(lat.value)
       loading.value = false
       return
     }
@@ -35,8 +38,6 @@ export function useCurrentWeather(lat: Ref<number | null>, lon: Ref<number | nul
   }
 
   watch([lat, lon], getCurrentWeather)
-
-  onMounted(getCurrentWeather)
 
   return {
     error,
