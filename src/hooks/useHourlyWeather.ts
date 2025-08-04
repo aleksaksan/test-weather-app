@@ -1,7 +1,6 @@
+import { URL_WEATHER } from '@/shared/consts'
 import { type HourlyWeatherResponse } from '@/types/IHourlyWeatherResponse'
 import { ref, watch, type Ref } from 'vue'
-
-const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast'
 
 export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null>) {
   const error = ref<string | null>(null)
@@ -17,10 +16,16 @@ export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null
 
     try {
       const hourlyParams = ['temperature_2m', 'weather_code']
-      const params = hourlyParams.join(',')
-      const res = await fetch(
-        `${WEATHER_URL}?latitude=${lat.value}&longitude=${lon.value}&timezone=auto&hourly=${params}&forecast_days=2`,
-      )
+      const params = {
+        latitude: lat.value.toString(),
+        longitude: lon.value.toString(),
+        timezone: 'auto',
+        hourly: hourlyParams.join(','),
+        forecast_days: '2',
+      }
+      const urlSearchParams = new URLSearchParams(params)
+
+      const res = await fetch(`${URL_WEATHER}?${urlSearchParams}`)
 
       const resData = await res.json()
       console.log(resData)

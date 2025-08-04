@@ -1,6 +1,5 @@
+import { URL_GET_CITY } from '@/shared/consts'
 import { ref, onMounted, watch } from 'vue'
-
-const URL = 'https://nominatim.openstreetmap.org/reverse'
 
 export const useGeolocation = () => {
   const latitude = ref<number | null>(null)
@@ -30,7 +29,14 @@ export const useGeolocation = () => {
 
   const getCity = async (lat: number, lon: number) => {
     try {
-      const res = await fetch(`${URL}?lat=${lat}&lon=${lon}&format=json`)
+      const params = {
+        lat: lat.toString(),
+        lon: lon.toString(),
+        format: 'json',
+      }
+      const urlSearchParams = new URLSearchParams(params)
+
+      const res = await fetch(`${URL_GET_CITY}?${urlSearchParams}`)
 
       const data = await res.json()
       city.value = data.address.city || 'unknown'

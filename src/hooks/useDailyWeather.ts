@@ -1,7 +1,6 @@
+import { URL_WEATHER } from '@/shared/consts'
 import type { IDailyWeatherResponse } from '@/types/IDailyWeatherResponse'
 import { ref, watch, type Ref } from 'vue'
-
-const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast'
 
 export function useDailyWeather(lat: Ref<number | null>, lon: Ref<number | null>) {
   const error = ref<string | null>(null)
@@ -22,10 +21,14 @@ export function useDailyWeather(lat: Ref<number | null>, lon: Ref<number | null>
         'temperature_2m_min',
         'temperature_2m_mean',
       ]
-      const params = dailyParams.join(',')
-      const res = await fetch(
-        `${WEATHER_URL}?latitude=${lat.value}&longitude=${lon.value}&timezone=auto&daily=${params}`,
-      )
+      const params = {
+        latitude: lat.value.toString(),
+        longitude: lon.value.toString(),
+        timezone: 'auto',
+        daily: dailyParams.join(','),
+      }
+      const urlSearchParams = new URLSearchParams(params)
+      const res = await fetch(`${URL_WEATHER}?${urlSearchParams}`)
 
       const resData = await res.json()
       console.log(resData)

@@ -21,17 +21,17 @@ provide('longitude', longitude)
 <template>
   <header>
     <div class="wrapper">
-      <CurrentDate />
       <nav>
         <RouterLink to="/">Current</RouterLink>
         <RouterLink to="/daily">Daily</RouterLink>
       </nav>
       <CurrentLocation @location-changed="updateLocation" />
-      <CurrentWeather :latitude="latitude" :longitude="longitude" />
+      <CurrentDate />
     </div>
   </header>
 
   <main>
+    <CurrentWeather :latitude="latitude" :longitude="longitude" />
     <RouterView />
   </main>
 </template>

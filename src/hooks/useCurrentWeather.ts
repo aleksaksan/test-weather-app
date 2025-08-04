@@ -1,7 +1,6 @@
+import { URL_WEATHER } from '@/shared/consts'
 import type { ICurrentWeatherResponse } from '@/types/ICurrentWeatherResponse'
 import { ref, watch, type Ref } from 'vue'
-
-const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast'
 
 export function useCurrentWeather(lat: Ref<number | null>, lon: Ref<number | null>) {
   const error = ref<string | null>(null)
@@ -17,10 +16,15 @@ export function useCurrentWeather(lat: Ref<number | null>, lon: Ref<number | nul
 
     try {
       const currentParams = ['temperature_2m', 'weather_code', 'apparent_temperature']
-      const params = currentParams.join(',')
-      const res = await fetch(
-        `${WEATHER_URL}?latitude=${lat.value}&longitude=${lon.value}&timezone=auto&current=${params}`,
-      )
+      const params = {
+        latitude: lat.value.toString(),
+        longitude: lon.value.toString(),
+        timezone: 'auto',
+        current: currentParams.join(','),
+      }
+      const urlSearchParams = new URLSearchParams(params)
+
+      const res = await fetch(`${URL_WEATHER}?${urlSearchParams}`)
 
       const data = await res.json()
       console.log(data)
