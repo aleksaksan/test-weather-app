@@ -5,7 +5,7 @@ const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast'
 
 export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null>) {
   const error = ref<string | null>(null)
-  const data = ref<HourlyWeatherResponse | null>(null)
+  const hourlyData = ref<HourlyWeatherResponse | null>(null)
   const loading = ref<boolean>(true)
 
   const getHourlyWeather = async () => {
@@ -24,7 +24,7 @@ export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null
 
       const resData = await res.json()
       console.log(resData)
-      data.value = resData
+      hourlyData.value = resData
     } catch (err) {
       if (err instanceof Error) {
         error.value = err.message
@@ -46,7 +46,7 @@ export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null
 
   return {
     error,
-    data,
+    hourlyData,
     loading,
   }
 }
