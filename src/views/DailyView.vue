@@ -1,7 +1,13 @@
+<script setup lang="ts">
+import DailyWeather from '@/components/DailyWeather.vue'
+import { inject, type Ref } from 'vue'
+
+const latitude = inject<Ref<number | null> | null>('latitude', null)
+const longitude = inject<Ref<number | null> | null>('longitude', null)
+</script>
+
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <DailyWeather :latitude="latitude" :longitude="longitude" />
 </template>
 
 <style>

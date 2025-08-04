@@ -1,14 +1,14 @@
-import { type HourlyWeatherResponse } from '@/types/IHourlyWeatherResponse'
+import type { IDailyWeatherResponse } from '@/types/IDailyWeatherResponse'
 import { ref, watch, type Ref } from 'vue'
 
 const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast'
 
-export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null>) {
+export function useDailyWeather(lat: Ref<number | null>, lon: Ref<number | null>) {
   const error = ref<string | null>(null)
-  const hourlyData = ref<HourlyWeatherResponse | null>(null)
+  const dailyWeatherData = ref<IDailyWeatherResponse | null>(null)
   const loading = ref<boolean>(true)
 
-  const getHourlyWeather = async () => {
+  const getDailyWeather = async () => {
     if (!lat.value || !lon.value) {
       error.value = "Can't get your coordinates!"
       loading.value = false
@@ -16,15 +16,20 @@ export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null
     }
 
     try {
-      const hourlyParams = ['temperature_2m', 'weather_code']
-      const params = hourlyParams.join(',')
+      const dailyParams = [
+        'weather_code',
+        'temperature_2m_max',
+        'temperature_2m_min',
+        'temperature_2m_mean',
+      ]
+      const params = dailyParams.join(',')
       const res = await fetch(
-        `${WEATHER_URL}?latitude=${lat.value}&longitude=${lon.value}&timezone=auto&hourly=${params}&forecast_days=2`,
+        `${WEATHER_URL}?latitude=${lat.value}&longitude=${lon.value}&timezone=auto&daily=${params}`,
       )
 
       const resData = await res.json()
       console.log(resData)
-      hourlyData.value = resData
+      dailyWeatherData.value = resData
     } catch (err) {
       if (err instanceof Error) {
         error.value = err.message
@@ -39,14 +44,14 @@ export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null
   watch(
     [lat, lon],
     ([newLat, newLon]) => {
-      if (newLat && newLon) getHourlyWeather()
+      if (newLat && newLon) getDailyWeather()
     },
     { immediate: true },
   )
 
   return {
     error,
-    hourlyData,
+    dailyWeatherData,
     loading,
   }
 }

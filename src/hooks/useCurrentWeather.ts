@@ -1,11 +1,11 @@
-import type { CurrentWeatherResponse } from '@/types/currentWeatherResponse'
+import type { ICurrentWeatherResponse } from '@/types/ICurrentWeatherResponse'
 import { ref, watch, type Ref } from 'vue'
 
 const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast'
 
 export function useCurrentWeather(lat: Ref<number | null>, lon: Ref<number | null>) {
   const error = ref<string | null>(null)
-  const curData = ref<CurrentWeatherResponse | null>(null)
+  const curData = ref<ICurrentWeatherResponse | null>(null)
   const loading = ref<boolean>(true)
 
   const getCurrentWeather = async () => {

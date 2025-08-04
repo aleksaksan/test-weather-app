@@ -1,14 +1,14 @@
 export interface HourlyWeatherResponse {
-  hourly: Hourly
-  hourly_units: HourlyUnits
+  hourly: IHourly
+  hourly_units: IHourlyUnits
 }
 
-interface Hourly {
+interface IHourly {
   temperature_2m: number[]
   time: string[]
   weather_code: number[]
 }
 
-interface HourlyUnits {
+interface IHourlyUnits {
   temperature_2m: string
 }
