@@ -4,6 +4,7 @@ export interface IDailyWeatherResponse {
 }
 
 interface IDaily {
+  weather_code: number[]
   temperature_2m_max: number[]
   temperature_2m_min: number[]
   temperature_2m_mean: number[]
