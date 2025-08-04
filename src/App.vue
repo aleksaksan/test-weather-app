@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import CurrentDate from './components/CurrentDate.vue'
 import CurrentWeather from './components/CurrentWeather.vue'
 import CurrentLocation from './components/CurrentLocation.vue'
-import { ref } from 'vue'
+import { provide, ref } from 'vue'
 
 const latitude = ref<number | null>(null)
 const longitude = ref<number | null>(null)
@@ -12,6 +12,10 @@ function updateLocation(lat: number, lon: number) {
   latitude.value = lat
   longitude.value = lon
 }
+
+//прокидываю пропсы через provide, чтобы опробовать этот метод
+provide('latitude', latitude)
+provide('longitude', longitude)
 </script>
 
 <template>
