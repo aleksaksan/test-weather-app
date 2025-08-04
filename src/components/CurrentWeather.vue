@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useCurrentWeather } from '@/hooks/useCurrentWeather'
+import { getWeatherIcon } from '@/shared/helpers/getWeatherIcon'
+import { weatherCodeMap } from '@/shared/mockData/weatherCode'
 import { toRef } from 'vue'
-import { getWeatherIcon } from './shared/helpers/getWeatherIcon'
-import { weatherCodeMap } from './shared/mockData/weatherCode'
 const props = defineProps<{
   latitude: number | null
   longitude: number | null
