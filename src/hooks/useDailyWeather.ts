@@ -31,7 +31,6 @@ export function useDailyWeather(lat: Ref<number | null>, lon: Ref<number | null>
       const res = await fetch(`${URL_WEATHER}?${urlSearchParams}`)
 
       const resData = await res.json()
-      console.log(resData)
       dailyWeatherData.value = resData
     } catch (err) {
       if (err instanceof Error) {
@@ -55,6 +54,5 @@ export function useDailyWeather(lat: Ref<number | null>, lon: Ref<number | null>
   return {
     error,
     dailyWeatherData,
-    loading,
   }
 }

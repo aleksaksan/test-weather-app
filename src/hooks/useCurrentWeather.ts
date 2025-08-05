@@ -27,7 +27,6 @@ export function useCurrentWeather(lat: Ref<number | null>, lon: Ref<number | nul
       const res = await fetch(`${URL_WEATHER}?${urlSearchParams}`)
 
       const data = await res.json()
-      console.log(data)
       curData.value = data
     } catch (err) {
       if (err instanceof Error) {

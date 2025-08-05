@@ -49,7 +49,7 @@ function selectPlace(place: ISearchPlace) {
           {{ city.admin3 }}; {{ city.admin4 }}
         </li>
       </ul>
-      <div v-if="selectedPlace" class="selected-place">
+      <div v-if="selectedPlace">
         {{ selectedPlace.name }}: {{ selectedPlace.country }},
       </div>
     </div>

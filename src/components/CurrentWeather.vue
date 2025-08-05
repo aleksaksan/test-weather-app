@@ -10,7 +10,7 @@ const props = defineProps<{
 const latitude = toRef(props, 'latitude')
 const longitude = toRef(props, 'longitude')
 
-const { curData, error, loading } = useCurrentWeather(latitude, longitude)
+const { curData, error } = useCurrentWeather(latitude, longitude)
 </script>
 
 <template>
@@ -41,9 +41,6 @@ const { curData, error, loading } = useCurrentWeather(latitude, longitude)
 <style scoped>
 .big-text {
   font-size: 3em;
-}
-.text-small {
-  font-size: 2em;
 }
 .svg {
   width: 4em;

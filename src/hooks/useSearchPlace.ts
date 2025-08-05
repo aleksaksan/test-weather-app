@@ -25,7 +25,6 @@ export const useSearchPlace = () => {
 
       const data: ISearchPlaceResponse = await res.json()
       cityList.value = data.results
-      console.log(cityList.value)
     } catch (err) {
       if (err instanceof Error) {
         error.value = err.message
