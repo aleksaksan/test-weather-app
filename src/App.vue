@@ -4,6 +4,7 @@ import CurrentDate from './components/CurrentDate.vue'
 import CurrentWeather from './components/CurrentWeather.vue'
 import CurrentLocation from './components/CurrentLocation.vue'
 import { provide, ref } from 'vue'
+import SearchPlace from './components/SearchPlace.vue'
 
 const latitude = ref<number | null>(null)
 const longitude = ref<number | null>(null)
@@ -21,6 +22,7 @@ provide('longitude', longitude)
 <template>
   <header>
     <div class="wrapper">
+      <SearchPlace @place-selected="updateLocation" />
       <nav>
         <RouterLink to="/">Current</RouterLink>
         <RouterLink to="/daily">Daily</RouterLink>
