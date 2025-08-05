@@ -93,7 +93,7 @@ main {
 }
 
 .forecast {
-  justify-self: start;
+  width: fit-content;
 }
 
 @media (min-width: 1024px) {
@@ -112,11 +112,13 @@ main {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 763px) {
   main {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    padding: 2rem 0;
+    justify-content: space-between;
   }
 }
 </style>

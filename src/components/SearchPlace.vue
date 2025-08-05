@@ -55,3 +55,37 @@ function selectPlace(place: ISearchPlace) {
     </div>
   </div>
 </template>
+
+<style scoped>
+input {
+  background-color: transparent;
+  width: 250px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  display: block;
+  color: var(--color-text);
+}
+
+.dropdown {
+  position: absolute;
+  width: 100%;
+  max-width: 440px;
+  background: var(--vt-c-black);
+  border-radius: 8px;
+  z-index: 100;
+  padding: 4px 0;
+  border: 1px solid #eee;
+}
+
+.dropdown-item {
+  padding: 6px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: var(--vt-c-black-soft);
+}
+</style>

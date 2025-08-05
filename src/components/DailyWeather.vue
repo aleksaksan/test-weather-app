@@ -37,16 +37,32 @@ const dataToDisplay = computed(() => {
   <div v-if="error">
     {{ error }}
   </div>
-  <ul v-else>
-    <li v-for="weather in dataToDisplay" :key="weather.date">
+  <ul v-else class="list">
+    <li v-for="weather in dataToDisplay" :key="weather.date" class="list-item">
       <div>{{ weather.weekDay }}</div>
       <div>{{ weather.date }}</div>
       <component :is="getWeatherIcon(weather?.weatherCode)" />
-      <div>{{ weather.temperature_2m_max }} {{ dailyWeatherData?.daily_units.daily_units }}</div>
-      <div>{{ weather.temperature_2m_min }} {{ dailyWeatherData?.daily_units.daily_units }}</div>
-      <div>{{ weather.temperature_2m_mean }} {{ dailyWeatherData?.daily_units.daily_units }}</div>
+      <div>{{ weather.temperature_2m_max }}°</div>
+      <div>{{ weather.temperature_2m_min }}°</div>
+      <div>{{ weather.temperature_2m_mean }}°</div>
     </li>
   </ul>
 </template>
 
-<style></style>
+<style scoped>
+.list {
+  width: max-content;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 100px repeat(4, minmax(80px, 1fr)) 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0.25rem 0;
+}
+
+.list-item + .list-item {
+  border-top: rgba(255, 255, 255, 0.2) solid 1px;
+}
+</style>
