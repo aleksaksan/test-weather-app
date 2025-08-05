@@ -30,21 +30,4 @@ watch([latitude, longitude], ([lat, lon]) => {
   </div>
 </template>
 
-<style scoped>
-.geolocation-wrapper {
-  padding: 1rem;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  max-width: 400px;
-  margin: 0 auto;
-}
-.loading {
-  color: #666;
-}
-.error {
-  color: #d32f2f;
-}
-.result {
-  color: #2e7d32;
-}
-</style>
+<style scoped></style>

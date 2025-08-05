@@ -32,13 +32,13 @@ function selectPlace(place: ISearchPlace) {
       <input
         v-model="searchQuery"
         @focus="showDropdown = !!searchQuery.trim()"
-        laceholder="Search..."
+        placeholder="Search..."
         type="text"
       />
 
-      <div v-if="loading" class="dropdown loading">Загрузка...</div>
-      <div v-else-if="error" class="dropdown error">Ошибка: {{ error }}</div>
-      <ul v-else-if="showDropdown && cityList.length" class="dropdown">
+      <div v-if="loading && cityList?.length" class="dropdown loading">Загрузка...</div>
+      <div v-else-if="error" class="dropdown error">{{ error }}</div>
+      <ul v-else-if="showDropdown && cityList?.length" class="dropdown">
         <li
           v-for="(city, index) in cityList"
           :key="index"

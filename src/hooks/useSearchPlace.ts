@@ -8,7 +8,7 @@ export const useSearchPlace = () => {
   const cityList = ref<ISearchPlace[]>([])
 
   const getCityList = async (cityName: string) => {
-    if (!cityName.trim()) {
+    if (!cityName.trim() || cityName.length < 4) {
       cityList.value = []
       return
     }
