@@ -26,17 +26,17 @@ provide('longitude', longitude)
       <CurrentLocation @location-changed="updateLocation" class="left-auto" />
       <CurrentDate />
     </div>
-    <div class="flex-container">
-      <CurrentWeather :latitude="latitude" :longitude="longitude" class="current-weather" />
-      <nav>
-        <RouterLink to="/">Current</RouterLink>
-        <RouterLink to="/daily">Daily</RouterLink>
-      </nav>
-    </div>
+    <nav>
+      <RouterLink to="/">Current</RouterLink>
+      <RouterLink to="/daily">Daily</RouterLink>
+    </nav>
   </header>
 
   <main>
-    <RouterView />
+    <div class="current-weather-wrapper">
+      <CurrentWeather :latitude="latitude" :longitude="longitude" class="current-weather" />
+    </div>
+    <RouterView class="forecast" />
   </main>
 </template>
 
@@ -57,20 +57,9 @@ header {
   margin-bottom: 2rem;
 }
 
-.flex-container {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-}
-
-.current-weather {
-  grid-column: 1;
-}
-
 nav {
   font-size: 12px;
   text-align: center;
-  grid-column: 2;
 }
 
 nav a.router-link-exact-active {
@@ -93,16 +82,41 @@ nav a:first-of-type {
 
 main {
   padding: 4rem 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.current-weather {
+  position: sticky;
+  top: 6rem;
+  word-wrap: normal;
+}
+
+.forecast {
+  justify-self: start;
 }
 
 @media (min-width: 1024px) {
   nav {
-    text-align: left;
     margin-left: -1rem;
     font-size: 1rem;
 
     padding: 1rem 0;
     margin-top: 1rem;
+  }
+}
+
+@media (min-width: 764px) {
+  .current-weather {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
   }
 }
 </style>

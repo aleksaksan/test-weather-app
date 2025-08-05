@@ -40,13 +40,13 @@ const { curData, error, loading } = useCurrentWeather(latitude, longitude)
 
 <style scoped>
 .big-text {
-  font-size: xx-large;
+  font-size: 3em;
 }
 .text-small {
-  font-size: small;
+  font-size: 2em;
 }
 .svg {
-  width: 4rem;
-  height: 4rem;
+  width: 4em;
+  height: 4em;
 }
 </style>

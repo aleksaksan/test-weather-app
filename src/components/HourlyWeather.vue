@@ -54,7 +54,7 @@ const filteredHourlyData = computed(() => {
 
 <style scoped>
 .container {
-  width: 40%;
+  width: max-content;
   margin: 0 auto;
 }
 
