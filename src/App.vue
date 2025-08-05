@@ -23,37 +23,54 @@ provide('longitude', longitude)
   <header>
     <div class="wrapper">
       <SearchPlace @place-selected="updateLocation" />
+      <CurrentLocation @location-changed="updateLocation" class="left-auto" />
+      <CurrentDate />
+    </div>
+    <div class="flex-container">
+      <CurrentWeather :latitude="latitude" :longitude="longitude" class="current-weather" />
       <nav>
         <RouterLink to="/">Current</RouterLink>
         <RouterLink to="/daily">Daily</RouterLink>
       </nav>
-      <CurrentLocation @location-changed="updateLocation" />
-      <CurrentDate />
     </div>
   </header>
 
   <main>
-    <CurrentWeather :latitude="latitude" :longitude="longitude" />
     <RouterView />
   </main>
 </template>
 
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  padding: 0.5rem 0;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.left-auto {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.flex-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.current-weather {
+  grid-column: 1;
 }
 
 nav {
-  width: 100%;
   font-size: 12px;
   text-align: center;
-  margin-top: 2rem;
+  grid-column: 2;
 }
 
 nav a.router-link-exact-active {
@@ -74,23 +91,11 @@ nav a:first-of-type {
   border: 0;
 }
 
+main {
+  padding: 4rem 0;
+}
+
 @media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
   nav {
     text-align: left;
     margin-left: -1rem;

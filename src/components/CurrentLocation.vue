@@ -12,22 +12,22 @@ watch([latitude, longitude], ([lat, lon]) => {
 </script>
 
 <template>
-  <div v-if="loading">Gettings your location...</div>
-  <div v-else class="geolocation-wrapper">
-    <div v-if="error" class="status error">
+  <div v-if="loading" class="small-text">Gettings your location...</div>
+  <div v-else class="small-text">
+    <div v-if="error" class="small-text">
       {{ error }}
     </div>
 
     <div v-else-if="latitude && longitude" class="result">
-      <h3>Ваши координаты:</h3>
-      <p>Широта: {{ latitude }}</p>
-      <p>Долгота: {{ longitude }}</p>
-    </div>
-
-    <div>
-      <h3>Ваш город: {{ city }}</h3>
+      <div>Your place: {{ city }}</div>
+      <p>latitude: {{ latitude }}</p>
+      <p>longitude: {{ longitude }}</p>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.small-text {
+  font-size: xx-small;
+}
+</style>

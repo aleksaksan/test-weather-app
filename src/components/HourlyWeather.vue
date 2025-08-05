@@ -41,13 +41,56 @@ const filteredHourlyData = computed(() => {
   <div v-if="error">
     {{ error }}
   </div>
-  <ul v-else>
-    <li v-for="weather in filteredHourlyData" :key="weather.time">
-      <div>{{ weather.formattedTime }}</div>
-      <component :is="getWeatherIcon(weather?.weatherCode)" />
-      <div>{{ weather.temp }}°C</div>
-    </li>
-  </ul>
+  <div v-else class="container">
+    <ul class="list">
+      <li v-for="weather in filteredHourlyData" :key="weather.time" class="item">
+        <div>{{ weather.formattedTime }}</div>
+        <component :is="getWeatherIcon(weather?.weatherCode)" />
+        <div>{{ weather.temp }}°C</div>
+      </li>
+    </ul>
+  </div>
 </template>
 
-<style></style>
+<style scoped>
+.container {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.item {
+  flex: 0 0 auto;
+  text-align: center;
+  display: flex;
+  gap: 4rem;
+  justify-content: space-between;
+  width: 300px;
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  .container::-webkit-scrollbar {
+    display: none;
+  }
+  .list {
+    width: max-content;
+  }
+  .item {
+    scroll-snap-align: start;
+  }
+}
+</style>

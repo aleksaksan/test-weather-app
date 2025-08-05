@@ -10,7 +10,7 @@ const props = defineProps<{
 const latitude = toRef(props, 'latitude')
 const longitude = toRef(props, 'longitude')
 
-const { curData, error } = useCurrentWeather(latitude, longitude)
+const { curData, error, loading } = useCurrentWeather(latitude, longitude)
 </script>
 
 <template>
@@ -19,7 +19,9 @@ const { curData, error } = useCurrentWeather(latitude, longitude)
   </div>
   <div v-else>
     <div>
-      <div>{{ curData?.current.temperature_2m }} {{ curData?.current_units.temperature_2m }}</div>
+      <div class="big-text">
+        {{ curData?.current.temperature_2m }} {{ curData?.current_units.temperature_2m }}
+      </div>
       <div>
         {{
           curData?.current.weather_code !== undefined
@@ -27,7 +29,7 @@ const { curData, error } = useCurrentWeather(latitude, longitude)
             : 'unknown weather'
         }}
       </div>
-      <component :is="getWeatherIcon(curData?.current.weather_code)" />
+      <component :is="getWeatherIcon(curData?.current.weather_code)" class="svg" />
     </div>
     <div>
       Feels like {{ curData?.current.apparent_temperature }}
@@ -36,4 +38,15 @@ const { curData, error } = useCurrentWeather(latitude, longitude)
   </div>
 </template>
 
-<style></style>
+<style scoped>
+.big-text {
+  font-size: xx-large;
+}
+.text-small {
+  font-size: small;
+}
+.svg {
+  width: 4rem;
+  height: 4rem;
+}
+</style>
