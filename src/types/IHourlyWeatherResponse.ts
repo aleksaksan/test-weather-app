@@ -1,4 +1,4 @@
-export interface HourlyWeatherResponse {
+export interface IHourlyWeatherResponse {
   hourly: IHourly
   hourly_units: IHourlyUnits
 }

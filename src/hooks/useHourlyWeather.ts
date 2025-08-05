@@ -1,10 +1,10 @@
 import { URL_WEATHER } from '@/shared/consts'
-import { type HourlyWeatherResponse } from '@/types/IHourlyWeatherResponse'
+import { type IHourlyWeatherResponse } from '@/types/IHourlyWeatherResponse'
 import { ref, watch, type Ref } from 'vue'
 
 export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null>) {
   const error = ref<string | null>(null)
-  const hourlyData = ref<HourlyWeatherResponse | null>(null)
+  const hourlyData = ref<IHourlyWeatherResponse | null>(null)
   const loading = ref<boolean>(true)
 
   const getHourlyWeather = async () => {
@@ -28,7 +28,6 @@ export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null
       const res = await fetch(`${URL_WEATHER}?${urlSearchParams}`)
 
       const resData = await res.json()
-      console.log(resData)
       hourlyData.value = resData
     } catch (err) {
       if (err instanceof Error) {
@@ -52,6 +51,5 @@ export function useHourlyWeather(lat: Ref<number | null>, lon: Ref<number | null
   return {
     error,
     hourlyData,
-    loading,
   }
 }

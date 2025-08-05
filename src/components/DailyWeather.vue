@@ -20,9 +20,9 @@ const dataToDisplay = computed(() => {
     const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     const date = new Date(time)
     const day = date.getDate().toString().padStart(2, '0')
-    const mounth = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
     return {
-      date: `${day}.${mounth}`,
+      date: `${day}.${month}`,
       weekDay: weekDays[date.getDay()],
       weatherCode: dailyWeatherData.value?.daily.weather_code[index],
       temperature_2m_max: dailyWeatherData.value?.daily.temperature_2m_max[index],
