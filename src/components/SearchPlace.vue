@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useDebounce } from '@/hooks/useDebounce'
 import { useSearchPlace } from '@/hooks/useSearchPlace'
+import { useClickOutside } from '@/hooks/useClickOutside'
 import type { ISearchPlace } from '@/types/ISearchPlaceResponse'
 import { ref, defineEmits, watch } from 'vue'
 
@@ -12,6 +13,7 @@ const debouncedSearchQuery = useDebounce(searchQuery)
 const { cityList, loading, error, getCityList } = useSearchPlace()
 const showDropdown = ref(false)
 const selectedPlace = ref<ISearchPlace | null>(null)
+const dropdownContainerRef = ref<HTMLElement | null>(null)
 
 watch(debouncedSearchQuery, (newVal) => {
   getCityList(newVal)
@@ -20,15 +22,21 @@ watch(debouncedSearchQuery, (newVal) => {
 
 function selectPlace(place: ISearchPlace) {
   selectedPlace.value = place
-  showDropdown.value = false
   searchQuery.value = place.name
   emit('place-selected', place.latitude, place.longitude)
+  showDropdown.value = false
 }
+
+function closeDropdown() {
+  showDropdown.value = false
+}
+
+useClickOutside(dropdownContainerRef, closeDropdown)
 </script>
 
 <template>
   <div>
-    <div>
+    <div ref="dropdownContainerRef">
       <input
         v-model="searchQuery"
         @focus="showDropdown = !!searchQuery.trim()"
@@ -49,9 +57,7 @@ function selectPlace(place: ISearchPlace) {
           {{ city.admin3 }}; {{ city.admin4 }}
         </li>
       </ul>
-      <div v-if="selectedPlace">
-        {{ selectedPlace.name }}: {{ selectedPlace.country }},
-      </div>
+      <div v-if="selectedPlace">{{ selectedPlace.name }}: {{ selectedPlace.country }},</div>
     </div>
   </div>
 </template>
