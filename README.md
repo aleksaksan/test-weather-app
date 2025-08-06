@@ -1,39 +1,18 @@
-# .
+## TASK:
+# Weather Forecast Application 
+Weather Forecast Application 
+**Objective:**Build a simple Vue.js application that allows users to search for locations and display current weather conditions along with a daily forecast.
 
-This template should help get you started developing with Vue 3 in Vite.
+Search for locations using an API (e.g.,https://geocoding-api.open-meteo.com/v1/search?name=Berlin&count=10&language=en&format=json).
+Fetch and display daily weather forecasts and current conditions (e.g.,https://api.open-meteo.com/v1/forecast?latitude=55.7522&longitude=37.6156&hourly=temperature_2m&start_date=2024-04-02&end_date=2024-04-03).
+Present the forecast in a user-friendly format (a simple list or chart).
+Requirements:
 
-## Recommended IDE Setup
+Must use Vue.js.
+Implement location search through the API.
+Time stamps should be converted to the user’s local timezone.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Type Support for `.vue` Imports in TS
+## Link to Github pages:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+https://aleksaksan.github.io/test-weather-app/#/
