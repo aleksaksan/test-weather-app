@@ -18,7 +18,7 @@ watch([latitude, longitude], ([lat, lon]) => {
       {{ error }}
     </div>
 
-    <div v-else-if="latitude && longitude" class="result">
+    <div v-else-if="latitude && longitude">
       <div>Your place: {{ city }}</div>
       <p>latitude: {{ latitude }}</p>
       <p>longitude: {{ longitude }}</p>
