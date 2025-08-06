@@ -1,5 +1,5 @@
-## TASK:
-# Weather Forecast Application 
+# TASK:
+## Weather Forecast Application 
 Weather Forecast Application 
 **Objective:**Build a simple Vue.js application that allows users to search for locations and display current weather conditions along with a daily forecast.
 
@@ -13,6 +13,6 @@ Implement location search through the API.
 Time stamps should be converted to the user’s local timezone.
 
 
-## Link to Github pages:
+# Link to Github pages:
 
 https://aleksaksan.github.io/test-weather-app/#/
